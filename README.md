@@ -1,72 +1,83 @@
-# Test Automation Project
+# OrangeHRM Automation
 
-## Overview
-This project is designed to automate testing processes for software applications. It provides a framework to write, execute, and manage automated tests efficiently, ensuring high-quality software delivery.
-
-## Features
-- Modular and reusable test scripts.
-- Support for multiple testing frameworks.
-- Easy integration with CI/CD pipelines.
-- Detailed reporting and logging.
+This project is a test automation framework for the OrangeHRM application using Selenium and Pytest.
 
 ## Prerequisites
-- Node.js (if using JavaScript-based frameworks).
-- Python (if using Python-based frameworks).
-- Any required dependencies specified in the `package.json` or `requirements.txt` file.
+
+Before running the tests, ensure you have the following installed:
+
+1. Python 3.7 or higher
+2. Google Chrome browser
+3. ChromeDriver (automatically managed by `chromedriver-autoinstaller`)
 
 ## Installation
+
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/kaushan23/Orange-HRM-Test-Automation.git
    ```
-2. Navigate to the project directory:
+
+2. Create a virtual environment (optional but recommended):
    ```bash
-   cd test-automation
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-3. Install dependencies:
-   - For Node.js:
-     ```bash
-     npm install
-     ```
-   - For Python:
-     ```bash
-     pip install -r requirements.txt
-     ```
 
-## Usage
-1. Configure the test settings in the appropriate configuration file (e.g., `config.json` or `.env`).
-2. Run the tests:
-   - For Node.js:
-     ```bash
-     npm test
-     ```
-   - For Python:
-     ```bash
-     pytest
-     ```
-3. View the test results in the console or generated reports.
+3. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Folder Structure
+
+## Running the Tests
+
+1. To run all tests:
+   ```bash
+    pytest TestCases/test_orange_hrm.py
+   ```
+
+2. To generate an HTML report after all tests are completed and save it in the `Reports` folder with a timestamp:
+   ```bash
+   # Step 1: Generate the timestamp
+        $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+
+   # Step 2: Run the test with the generated report name
+        pytest TestCases/test_orange_hrm.py --html="Reports/report_$timestamp.html"
+   ```
+
+3. To suppress warnings while generating the report:
+   ```bash
+   # Step 1: Generate the timestamp
+        $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+
+   # Step 2: Run the test with the generated report name
+        pytest TestCases/test_orange_hrm.py --html="Reports/report_$timestamp.html" --disable-warnings
+   ```
+## Screenshots
+
+- Screenshots are saved in the `Screenshots` directory under a subfolder for each test run.
+
+## Project Structure
+
 ```
 test-automation/
-├── src/                # Source code for the test framework
-├── tests/              # Test scripts
-├── reports/            # Test execution reports
-├── config/             # Configuration files
-├── package.json        # Node.js dependencies (if applicable)
-├── requirements.txt    # Python dependencies (if applicable)
-└── README.md           # Project documentation
+├── PageObjects/           # Contains page object models for different pages
+├── Reports/               # Stores test execution reports
+├── Screenshots/           # Stores screenshots taken during test execution
+├── TestCases/             # Contains test case scripts
+├── conftest.py            # Pytest configuration and fixtures
+├── README.md              # Project documentation
+├── requirements.txt       # Project dependencies
 ```
 
-## Contributing
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Commit your changes and push the branch.
-4. Submit a pull request.
+## Notes
+
+- Ensure the Chrome browser version matches the ChromeDriver version managed by `chromedriver-autoinstaller`.
+- Use the `--disable-warnings` flag with pytest to suppress warnings:
+  ```bash
+  pytest --disable-warnings
+  ```
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
 
-## Contact
-For any questions or issues, please contact the project maintainer.
+This project is licensed under the MIT License.
